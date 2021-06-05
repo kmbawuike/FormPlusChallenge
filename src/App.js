@@ -1,13 +1,11 @@
-import "./App.css"
+import './assets/styles/app.scss'
 import { Provider } from "react-redux"
 import store from './store'
-
+import Landing from "./Pages/Landing"
 function App() {
   return (
     <Provider store={store()}>
-      <div>
-        <p>Hello FormPlus</p>
-      </div>
+      <Landing />
     </Provider>
   )
 }
