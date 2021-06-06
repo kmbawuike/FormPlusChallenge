@@ -21,14 +21,6 @@ const initialState = {
   pageLimit: 15,
 }
 
-console.log(
-  [
-    { name: "mosi anord" },
-    { name: "kelechi bittlw" },
-    { name: "abraham zilleke" },
-  ].sort(dynamicSort("name"))
-)
-
 const formTemplatesReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_FORM_TEMPLATES:
@@ -101,6 +93,8 @@ const formTemplatesReducer = (state = initialState, action) => {
           state.formTemplates
         ),
       }
+
+    
 
     case RESET_FORM_TEMPLATES:
       return{

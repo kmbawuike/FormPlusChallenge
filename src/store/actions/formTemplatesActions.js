@@ -86,9 +86,10 @@ export const getFormTemplates = (currentPage) => {
       )
       setTimeout(() => {
         if (!res) {
+          dispatch(uiStopLoading())
           return "Request took too long, please check your internet and try again!"
         }
-      }, 15000)
+      }, 5000)
 
       await dispatch(uiStopLoading())
       if (res.status === 200 || res.status === 201) {

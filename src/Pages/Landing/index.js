@@ -13,19 +13,22 @@ import {
 } from "../../store/actions/formTemplatesActions"
 import Loader from "../../components/Loader"
 import Pagination from "../../components/Pagination"
-import { ascendingOrder, capitalize, dynamicSort } from "../../utility/helpers"
+import { capitalize } from "../../utility/helpers"
 
 export default function Landing() {
   // data
   const categories = ["All", "Education", "E-commerce", "Health"]
-  const [currentCategory, setCurrentCategory] = useState('All')
-  const order = ["Default", "Ascending", "Descending"]
-  const date = ["Default", "Ascending", "Descending"]
+  const [category, setCategory] = useState("All")
+  const [sortState, setSortState] = useState({
+    order: "Default",
+    date: "Default",
+  })
+  const orderSortArray = ["Default", "Ascending", "Descending"]
+  const dateSortArray = ["Default", "Ascending", "Descending"]
   const [currentPage, setCurrentPage] = useState(1)
   const [templateName, setTemplateName] = useState("")
 
-
-// react redux dispatch
+  // react redux dispatch
   const dispatch = useDispatch()
 
   // store
@@ -35,10 +38,16 @@ export default function Landing() {
   )
 
   useEffect(() => {
-    dispatch(getFormTemplates(currentPage))
+    async function getData() {
+      const error = await dispatch(getFormTemplates(currentPage))
+      if (error) {
+        alert(error)
+      }
+    }
+    getData()
   }, [])
 
-// search and filter functions begin
+  // search and filter functions begin
   const handleFilterTemplate = (query, filterType) => {
     setCurrentPage(1)
     dispatch(getFilteredTemplates(filterType, query, currentPage))
@@ -46,42 +55,50 @@ export default function Landing() {
 
   const handleCategoryChange = (e) => {
     const value = e.target.value
-    setCurrentCategory(value)
+    setCategory(value)
     setCurrentPage(1)
-    setTemplateName('')
-    if(value === 'All'){
+    setTemplateName("")
+    setSortState({
+      date: "Default",
+      order: "Default",
+    })
+    if (value === "All") {
       dispatch(setDefaultSort(currentPage))
-    }else{
-      handleFilterTemplate('category', value)
-    } 
+    } else {
+      handleFilterTemplate("category", value)
+    }
   }
-  const handleSearchChange = (e) => {
-    setTemplateName(e.target.value)
-  }
+
   const search = () => {
-    handleFilterTemplate('name', templateName)
+    handleFilterTemplate("name", templateName)
   }
+
   const handleSort = (e, sortType) => {
     const value = e.target.value
-    if(value.toLowerCase() === 'ascending'){
+    setSortState({ ...sortState, [e.target.name]: value })
+    if (value.toLowerCase() === "ascending") {
       console.log(sortType)
       dispatch(sortAscendingOrder(sortType))
-    }else if(value.toLowerCase() === 'descending'){
+    } else if (value.toLowerCase() === "descending") {
       dispatch(sortDescendingOrder(sortType))
-    }else{
-    dispatch(setDefaultSort(currentPage))
+    } else {
+      dispatch(setDefaultSort(currentPage))
     }
   }
 
   // search and filter functions end
-  
+
   return (
     <main className={`main-container ${isLoading ? "loading" : "loaded"}`}>
       {isLoading && <Loader />}
       <section className="container">
         {/* filters and search begin */}
         <section className="filter-container">
-          <Input placeholder="Search Templates" onClick={search} onChange={handleSearchChange} />
+          <Input
+            placeholder="Search Templates"
+            onClick={search}
+            onChange={(e) => setTemplateName(e.target.value)}
+          />
           <section className="filter-dropdown-container">
             <span>Sort By:</span>
             <Select
@@ -89,11 +106,23 @@ export default function Landing() {
               options={categories}
               onChange={handleCategoryChange}
             />
-            <Select legend="Order" options={order} onChange={(e)=> handleSort(e, 'name')}/>
-            <Select legend="Date" options={date} onChange={(e)=> handleSort(e, 'created')}/>
+            <Select
+              legend="Order"
+              options={orderSortArray}
+              onChange={(e) => handleSort(e, "name")}
+              name="order"
+              value={sortState.order}
+            />
+            <Select
+              legend="Date"
+              options={dateSortArray}
+              onChange={(e) => handleSort(e, "created")}
+              name="date"
+              value={sortState.date}
+            />
           </section>
         </section>
-       {/* filters and search end */}
+        {/* filters and search end */}
         <section className="info-container">
           <InfoIcon className="info-icon" />
           <p>
@@ -104,7 +133,7 @@ export default function Landing() {
         {/* Templates Cards begin */}
         <section className="templates-container">
           <section className="templates-header">
-            <h1>{currentCategory} Templates</h1>
+            <h1>{category} Templates</h1>
             <span>{formTemplates.length} templates</span>
           </section>
           <section className="templates">
@@ -118,15 +147,15 @@ export default function Landing() {
               ))}
           </section>
         </section>
-       {/* Templates Cards end */}
-       {/* footer and pagination */}
+        {/* Templates Cards end */}
+        {/* footer and pagination */}
         <footer>
           <Pagination
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
           />
         </footer>
-      {/* footer and pagination */}
+        {/* footer and pagination */}
       </section>
     </main>
   )
