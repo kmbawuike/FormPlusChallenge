@@ -2,7 +2,7 @@ import React from "react"
 
 export default function Card({title, description}) {
   return (
-    <section className="template">
+    <section className="template" data-testid="custom-card">
       <h3>{title}</h3>
       <p>
         {description}

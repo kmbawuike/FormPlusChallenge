@@ -85,7 +85,6 @@ export default function Landing() {
       dispatch(setDefaultSort(currentPage))
     }
   }
-
   // search and filter functions end
 
   return (
@@ -95,6 +94,7 @@ export default function Landing() {
         {/* filters and search begin */}
         <section className="filter-container">
           <Input
+            data-testid="custom-input"
             placeholder="Search Templates"
             onClick={search}
             onChange={(e) => setTemplateName(e.target.value)}

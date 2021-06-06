@@ -9,7 +9,7 @@ export default function Input({
   onClick
 }) {
   return (
-    <section className="custom-input">
+    <section className="custom-input" data-testid="custom-input">
       <input placeholder={placeholder} id={id} type={type} onChange={onChange}/>
       <SearchIcon className="icon cursor" onClick={onClick}/>
     </section>

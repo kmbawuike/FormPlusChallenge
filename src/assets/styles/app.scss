@@ -11,60 +11,12 @@ $info: #FFF4EA;
   font-size: 16px;
 }
 
-body {
+
+
+.main-container {
   height: 100vh;
 }
 
-// .main-container {
-//   position: relative;
-// }
-
-// preloading styles begin
-
-.loading {
-  background-color: whitesmoke;
-  opacity: 0.7;
-}
-
-.loaded {
-  background-color: white;
-  opacity: 1;
-}
-
-.loader {
-  border: 16px solid white;
-  border-radius: 50%;
-  // background-color: white;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite;
-  /* Safari */
-  animation: spin 2s linear infinite;
-}
-
-/* Safari */
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-// preloading styles end
 
 // Container
 .container {
@@ -148,6 +100,7 @@ fieldset {
 .filter-dropdown-container {
   display: flex;
   align-items: center;
+
   span {
     color: $grey_font
   }
@@ -241,6 +194,20 @@ fieldset {
 
 // templates styles end
 
+
+// preloading styles begin
+
+.loading {
+  background-color: whitesmoke;
+  opacity: 0.7;
+}
+
+.loaded {
+  background-color: white;
+  opacity: 1;
+}
+
+
 @keyframes spin {
   from {
     transform: translate(-50%, -50%) rotate(0);
@@ -250,7 +217,6 @@ fieldset {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
-
 
 .rotating-border {
   --border-radius: 1rem;
@@ -320,6 +286,9 @@ fieldset {
       #1a8caf 0.95turn 1.00turn);
 }
 
+// preloading styles end
+
+
 .cursor {
   cursor: pointer;
 }
@@ -359,9 +328,10 @@ fieldset {
 
 // responsive design screens
 @media screen and (max-width: 1192px) {
-  .template{
+  .template {
     width: 48%;
-    p{
+
+    p {
       font-size: 1.2rem;
       line-height: 1.5rem;
     }
@@ -372,11 +342,13 @@ fieldset {
 @media screen and (max-width: 1027px) {
   .filter-container {
     flex-direction: column;
+
     .filter-dropdown-container {
       margin-top: 1rem;
       // flex-wrap: wrap;
       // flex-direction: column;
     }
+
     .custom-input {
       width: 100%;
     }
@@ -385,36 +357,38 @@ fieldset {
 }
 
 @media screen and (max-width: 778px) {
-  .info-container{
+  .info-container {
     flex-direction: column;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    .info-icon{
+
+    .info-icon {
       margin-bottom: 1rem;
       width: 2rem;
     }
-    p{
+
+    p {
       line-height: 1.5rem;
     }
   }
 }
 
 @media screen and (max-width: 565px) {
- .template{
-   width: 100%;
- }
+  .template {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 535px) {
-  .filter-dropdown-container{
+  .filter-dropdown-container {
     flex-direction: column;
     align-items: flex-start;
     // border: 1px solid black;
   }
-  fieldset{
+
+  fieldset {
     width: 100%;
     margin-left: 0;
     margin-top: 0.5rem;
   }
- }
-
+}

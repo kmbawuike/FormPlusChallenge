@@ -94,7 +94,6 @@ export const getFormTemplates = (currentPage) => {
       await dispatch(uiStopLoading())
       if (res.status === 200 || res.status === 201) {
         const resJson = await res.json()
-        console.log(resJson)
         await dispatch(setFormTemplates(resJson))
         await dispatch(setCurrentFormTemplates(currentPage))
         return null
