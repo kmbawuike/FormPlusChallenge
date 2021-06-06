@@ -4,10 +4,7 @@ import { ReactComponent as ChevronLeft } from "../assets/icons/chevron-left.svg"
 import { useDispatch, useSelector } from "react-redux"
 import { goNextPage, goPrevPage } from "../store/actions/formTemplatesActions"
 
-export default function Pagination({
-  currentPage,
-  setCurrentPage,
-}) {
+export default function Pagination({ currentPage, setCurrentPage }) {
   const { formTemplates, pageLimit } = useSelector(
     (state) => state.formTemplates
   )
@@ -26,17 +23,23 @@ export default function Pagination({
   return (
     <>
       <ul className="footer">
-        <li className="page-button cursor" onClick={prevPage}>
+        {currentPage > 1 ? <li className="page-button cursor" onClick={prevPage}>
           <ChevronLeft />
           <span>Previous</span>
-        </li>
+        </li> : <li></li>}
+        {/* <li className="page-button cursor" onClick={prevPage}>
+          <ChevronLeft />
+          <span>Previous</span>
+        </li> */}
         <li>
           <span>{currentPage}</span> of {totalPages}
         </li>
-        <li className="page-button cursor" onClick={nextPage}>
-          <span>Next</span>
-          <ChevronRight />
-        </li>
+        {currentPage <= totalPages && (
+          <li className="page-button cursor" onClick={nextPage}>
+            <span>Next</span>
+            <ChevronRight />
+          </li>
+        )}
       </ul>
     </>
   )
