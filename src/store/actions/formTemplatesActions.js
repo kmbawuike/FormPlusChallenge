@@ -5,6 +5,11 @@ import {
   SET_CURRENT_FORM_TEMPLATES,
   SET_FORM_TEMPLATES,
 } from "../actionTypes"
+import {
+  RESET_DEFAULT_SORT,
+  SORT_ASENDING,
+  SORT_DESCENDING,
+} from "./actionTypes"
 import { uiStartLoading, uiStopLoading } from "./uiActions"
 
 const setFormTemplates = (formTemplates) => {
@@ -79,10 +84,23 @@ export const getFilteredTemplates = (filterType, query, currentPage) => {
   }
 }
 
-export const getSortedArray = (sortType, currentPage) => {
-  return async (dispatch) => {
-    // await dispatch(setFilterTemplates(filterType, query))
-    // await dispatch(setCurrentFormTemplates(currentPage))
+export const sortAscendingOrder = (sortProperty) => {
+  return {
+    type: SORT_ASENDING,
+    sortProperty,
   }
 }
 
+export const sortDescendingOrder = (sortProperty) => {
+  return {
+    type: SORT_DESCENDING,
+    sortProperty,
+  }
+}
+
+export const setDefaultSort = (currentPage) => {
+  return {
+    type: RESET_DEFAULT_SORT,
+    currentPage
+  }
+}

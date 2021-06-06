@@ -1,4 +1,5 @@
-import { paginatedData } from "../../utility/helpers"
+import { dynamicSort, paginatedData } from "../../utility/helpers"
+import { RESET_DEFAULT_SORT, SORT_ASENDING, SORT_DESCENDING } from "../actions/actionTypes"
 import {
   SET_FORM_TEMPLATES,
   FILTER_FORM_TEMPLATES,
@@ -15,6 +16,8 @@ const initialState = {
   currentPage: 1,
   pageLimit: 15,
 }
+
+console.log([{name: 'mosi anord'}, {name: 'kelechi bittlw'}, {name: "abraham zilleke"}].sort(dynamicSort('name')))
 
 const formTemplatesReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -61,6 +64,28 @@ const formTemplatesReducer = (state = initialState, action) => {
           (elem) => elem[action.filterType].includes(action.query)
         ),
       }
+
+      case SORT_ASENDING:
+        return {
+          ...state,
+          currentFormTemplates: state.currentFormTemplates.sort(dynamicSort(action.sortProperty)),
+        }
+
+        case SORT_DESCENDING:
+        return {
+          ...state,
+          currentFormTemplates: state.currentFormTemplates.sort(dynamicSort(action.sortProperty, 'desc')),
+        }
+
+        case RESET_DEFAULT_SORT:
+        return {
+          ...state,
+          currentFormTemplates: paginatedData(
+            action.currentPage,
+            state.pageLimit,
+            state.formTemplates
+          ),
+        }
 
     case RESET_FORM_TEMPLATES:
       return initialState

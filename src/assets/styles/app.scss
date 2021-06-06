@@ -10,13 +10,15 @@ $info: #FFF4EA;
   box-sizing: border-box;
   font-size: 16px;
 }
-// body{
-//     height: 100vh;
-// }
+body{
+    height: 100vh;
+}
 
 // .main-container {
 //   position: relative;
 // }
+
+// preloading styles begin
 
 .loading {
   background-color: whitesmoke;
@@ -61,6 +63,8 @@ $info: #FFF4EA;
   }
 }
 
+// preloading styles end
+
 // Container
 .container {
   width: 90%;
@@ -68,6 +72,7 @@ $info: #FFF4EA;
   margin: 0 auto;
 }
 
+// input styles begin
 .custom-input {
   border: 0.03125rem solid $grey_border;
   border-radius: 0.125rem;
@@ -96,24 +101,10 @@ $info: #FFF4EA;
   }
 }
 
-.filter-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding-top: 1.5rem;
-}
 
-.filter-dropdown-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+// input styles end
 
-  // border: 1px solid black;
-  span {
-    color: $grey_font
-  }
-}
-
+// select styles begin
 fieldset {
   border: 0.03125rem solid $grey_border;
   color: $grey_font;
@@ -143,7 +134,31 @@ fieldset {
     }
   }
 }
+// select styles end
 
+
+// filter styles begin
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+}
+
+.filter-dropdown-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  // border: 1px solid black;
+  span {
+    color: $grey_font
+  }
+}
+
+// filter styles end
+
+// info styles begin
 .info-container {
   background-color: $info;
   display: flex;
@@ -160,7 +175,9 @@ fieldset {
     font-size: 0.875rem;
   }
 }
+// info styles end
 
+// templates styles begin
 .templates-container {
   margin-top: 6.3rem;
 }
@@ -220,6 +237,8 @@ fieldset {
   }
 }
 
+// templates styles end
+
 @keyframes spin {
   from {
     transform: translate(-50%, -50%) rotate(0);
@@ -229,6 +248,7 @@ fieldset {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+
 
 .rotating-border {
   --border-radius: 1rem;
@@ -300,8 +320,10 @@ fieldset {
 .cursor{
   cursor: pointer;
 }
+
+// footer styles start
 .footer {
-  margin: 2.6875rem 0;
+  padding: 2.6875rem 0 !important;
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -325,3 +347,4 @@ fieldset {
   }
 
 }
+// footer styles begin

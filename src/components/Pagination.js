@@ -7,7 +7,6 @@ import { goNextPage, goPrevPage } from "../store/actions/formTemplatesActions"
 export default function Pagination({
   currentPage,
   setCurrentPage,
-  totalRecords,
 }) {
   const { formTemplates, pageLimit } = useSelector(
     (state) => state.formTemplates

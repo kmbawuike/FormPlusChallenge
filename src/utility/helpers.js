@@ -13,12 +13,21 @@ export function capitalize(text) {
   return capsArray.join(" ")
 }
 
-export function descendingOrder(a, b) {
-  if (a > b) {
-    return -1
+export function dynamicSort(property,order) {
+  let sort_order = 1;
+  if(order === "desc"){
+      sort_order = -1;
   }
-  if (b > a) {
-    return 1
+  return function (a, b){
+      // a should come before b in the sorted order
+      if(a[property] < b[property]){
+              return -1 * sort_order;
+      // a should come after b in the sorted order
+      }else if(a[property] > b[property]){
+              return 1 * sort_order;
+      // a and b are the same
+      }else{
+              return 0 * sort_order;
+      }
   }
-  return 0
 }
