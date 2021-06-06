@@ -1,6 +1,5 @@
 export const paginatedData = (currentPage, pageLimit, data) => {
   const offset = (currentPage - 1) * pageLimit
-  console.log(data.slice(offset, offset + pageLimit), data)
   return data.slice(offset, offset + pageLimit)
 }
 

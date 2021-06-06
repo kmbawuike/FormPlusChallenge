@@ -1,5 +1,9 @@
 import { dynamicSort, paginatedData } from "../../utility/helpers"
-import { RESET_DEFAULT_SORT, SORT_ASENDING, SORT_DESCENDING } from "../actions/actionTypes"
+import {
+  RESET_DEFAULT_SORT,
+  SORT_ASENDING,
+  SORT_DESCENDING,
+} from "../actions/actionTypes"
 import {
   SET_FORM_TEMPLATES,
   FILTER_FORM_TEMPLATES,
@@ -17,7 +21,13 @@ const initialState = {
   pageLimit: 15,
 }
 
-console.log([{name: 'mosi anord'}, {name: 'kelechi bittlw'}, {name: "abraham zilleke"}].sort(dynamicSort('name')))
+console.log(
+  [
+    { name: "mosi anord" },
+    { name: "kelechi bittlw" },
+    { name: "abraham zilleke" },
+  ].sort(dynamicSort("name"))
+)
 
 const formTemplatesReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -26,6 +36,14 @@ const formTemplatesReducer = (state = initialState, action) => {
         ...state,
         allFormTemplates: action.formTemplates,
         formTemplates: action.formTemplates,
+      }
+
+    case FILTER_FORM_TEMPLATES:
+      return {
+        ...state,
+        formTemplates: state.allFormTemplates.filter((elem) =>
+          elem[action.filterType].includes(action.query)
+        ),
       }
 
     case SET_CURRENT_FORM_TEMPLATES:
@@ -57,38 +75,38 @@ const formTemplatesReducer = (state = initialState, action) => {
           state.formTemplates
         ),
       }
-    case FILTER_FORM_TEMPLATES:
+
+    case SORT_ASENDING:
       return {
         ...state,
-        formTemplates: state.allFormTemplates.filter(
-          (elem) => elem[action.filterType].includes(action.query)
+        currentFormTemplates: state.currentFormTemplates.sort(
+          dynamicSort(action.sortProperty)
         ),
       }
 
-      case SORT_ASENDING:
-        return {
-          ...state,
-          currentFormTemplates: state.currentFormTemplates.sort(dynamicSort(action.sortProperty)),
-        }
+    case SORT_DESCENDING:
+      return {
+        ...state,
+        currentFormTemplates: state.currentFormTemplates.sort(
+          dynamicSort(action.sortProperty, "desc")
+        ),
+      }
 
-        case SORT_DESCENDING:
-        return {
-          ...state,
-          currentFormTemplates: state.currentFormTemplates.sort(dynamicSort(action.sortProperty, 'desc')),
-        }
-
-        case RESET_DEFAULT_SORT:
-        return {
-          ...state,
-          currentFormTemplates: paginatedData(
-            action.currentPage,
-            state.pageLimit,
-            state.formTemplates
-          ),
-        }
+    case RESET_DEFAULT_SORT:
+      return {
+        ...state,
+        currentFormTemplates: paginatedData(
+          action.currentPage,
+          state.pageLimit,
+          state.formTemplates
+        ),
+      }
 
     case RESET_FORM_TEMPLATES:
-      return initialState
+      return{
+        ...state, 
+        formTemplates: state.allFormTemplates
+      }
 
     default:
       return state

@@ -17,7 +17,7 @@ import { ascendingOrder, capitalize, dynamicSort } from "../../utility/helpers"
 
 export default function Landing() {
   // data
-  const categories = ["All", "Education", "E-Commerce", "Health"]
+  const categories = ["All", "Education", "E-commerce", "Health"]
   const [currentCategory, setCurrentCategory] = useState('All')
   const order = ["Default", "Ascending", "Descending"]
   const date = ["Default", "Ascending", "Descending"]
@@ -45,8 +45,15 @@ export default function Landing() {
   }
 
   const handleCategoryChange = (e) => {
-    setCurrentCategory(e.target.value)
+    const value = e.target.value
+    setCurrentCategory(value)
+    setCurrentPage(1)
     setTemplateName('')
+    if(value === 'All'){
+      dispatch(setDefaultSort(currentPage))
+    }else{
+      handleFilterTemplate('category', value)
+    } 
   }
   const handleSearchChange = (e) => {
     setTemplateName(e.target.value)

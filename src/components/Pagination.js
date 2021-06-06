@@ -27,10 +27,6 @@ export default function Pagination({ currentPage, setCurrentPage }) {
           <ChevronLeft />
           <span>Previous</span>
         </li> : <li></li>}
-        {/* <li className="page-button cursor" onClick={prevPage}>
-          <ChevronLeft />
-          <span>Previous</span>
-        </li> */}
         <li>
           <span>{currentPage}</span> of {totalPages}
         </li>
