@@ -19,10 +19,10 @@ export function dynamicSort(property,order) {
   }
   return function (a, b){
       // a should come before b in the sorted order
-      if(a[property] < b[property]){
+      if(a[property].toLowerCase() < b[property].toLowerCase()){
               return -1 * sort_order;
       // a should come after b in the sorted order
-      }else if(a[property] > b[property]){
+      }else if(a[property].toLowerCase() > b[property].toLowerCase()){
               return 1 * sort_order;
       // a and b are the same
       }else{
