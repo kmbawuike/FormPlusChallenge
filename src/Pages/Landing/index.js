@@ -81,7 +81,6 @@ export default function Landing() {
     const value = e.target.value
     setSortState({ ...sortState, [e.target.name]: value })
     if (value.toLowerCase() === "ascending") {
-      console.log(sortType)
       dispatch(sortAscendingOrder(sortType))
     } else if (value.toLowerCase() === "descending") {
       dispatch(sortDescendingOrder(sortType))
