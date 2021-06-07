@@ -8,6 +8,7 @@ import {
 } from "../actionTypes"
 import {
   RESET_DEFAULT_SORT,
+  SEARCH_FORM_TEMPLATES,
   SORT_ASENDING,
   SORT_DESCENDING,
 } from "./actionTypes"
@@ -58,7 +59,7 @@ export const sortDescendingOrder = (sortProperty) => {
 export const setDefaultSort = (currentPage) => {
   return {
     type: RESET_DEFAULT_SORT,
-    currentPage
+    currentPage,
   }
 }
 
@@ -106,13 +107,25 @@ export const getFormTemplates = (currentPage) => {
   }
 }
 
-export const getFilteredTemplates = (filterType, query, currentPage) => {
-  return async (dispatch) => {
-    await dispatch(setFilterTemplates(filterType, query))
-    await dispatch(setCurrentFormTemplates(currentPage))
+export const searchFormTemplates = (query, filterType) => {
+  return {
+    type: SEARCH_FORM_TEMPLATES,
+    query,
+    filterType,
   }
 }
 
+
+export const getFilteredTemplates = (filterType, query, currentPage) => {
+  return async (dispatch) => {
+    if (filterType === "name") {
+      await dispatch(searchFormTemplates(query, filterType))
+    } else {
+      await dispatch(setFilterTemplates(query, filterType))
+    }
+    await dispatch(setCurrentFormTemplates(currentPage))
+  }
+}
 
 export const resetFormTmplates = (currentPage) => {
   return async (dispatch) => {

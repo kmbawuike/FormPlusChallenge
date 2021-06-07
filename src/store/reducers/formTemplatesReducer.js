@@ -1,6 +1,7 @@
 import { dynamicSort, paginatedData } from "../../utility/helpers"
 import {
   RESET_DEFAULT_SORT,
+  SEARCH_FORM_TEMPLATES,
   SORT_ASENDING,
   SORT_DESCENDING,
 } from "../actions/actionTypes"
@@ -35,6 +36,14 @@ const formTemplatesReducer = (state = initialState, action) => {
         ...state,
         formTemplates: state.allFormTemplates.filter((elem) =>
           elem[action.filterType].includes(action.query)
+        ),
+      }
+
+      case SEARCH_FORM_TEMPLATES:
+      return {
+        ...state,
+        formTemplates: state.allFormTemplates.filter((elem) =>
+          elem[action.filterType].toLowerCase().includes(action.query.toLowerCase())
         ),
       }
 

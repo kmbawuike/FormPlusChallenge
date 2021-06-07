@@ -37,6 +37,8 @@ export default function Landing() {
     (state) => state.formTemplates
   )
 
+ 
+
   useEffect(() => {
     async function getData() {
       const error = await dispatch(getFormTemplates(currentPage))
@@ -65,12 +67,14 @@ export default function Landing() {
     if (value === "All") {
       dispatch(setDefaultSort(currentPage))
     } else {
-      handleFilterTemplate("category", value)
+      handleFilterTemplate(value, "category")
     }
   }
 
-  const search = () => {
-    handleFilterTemplate("name", templateName)
+  const search = (e) => {
+    setTemplateName(e.target.value)
+    handleFilterTemplate(templateName, "name")
+
   }
 
   const handleSort = (e, sortType) => {
@@ -85,6 +89,7 @@ export default function Landing() {
       dispatch(setDefaultSort(currentPage))
     }
   }
+
   // search and filter functions end
 
   return (
@@ -96,8 +101,7 @@ export default function Landing() {
           <Input
             data-testid="custom-input"
             placeholder="Search Templates"
-            onClick={search}
-            onChange={(e) => setTemplateName(e.target.value)}
+            onChange={search}
           />
           <section className="filter-dropdown-container">
             <span>Sort By:</span>
